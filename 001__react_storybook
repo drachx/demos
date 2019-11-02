@@ -1,22 +1,14 @@
-# 1 SETUP
--------
+# 1 - React.js
 npx create-react-app storybook
+npm install react-router-dom
 npm start
 
-npm install react-router-dom
+# 2 - Storybook.js
 npx -p @storybook/cli sb init --type react
 npm run storybook
 
-
-# 2 VSCODE
---------
+# 3 - Create Component
 ./cli/init
-npm start
-npm run storybook
-
-
-# 3 ADD COMPONENTS
-----------------
 ./cli/create-component-base About
 
 
