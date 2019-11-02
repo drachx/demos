@@ -1,0 +1,12 @@
+# 1 - Next.js
+npx create-next-app storybook
+cd storybook
+npm run dev
+
+# 2 - Storybook.js
+npx -p @storybook/cli sb init --type react
+npm run storybook
+
+# 3 - Create Component
+./cli/init
+./cli/create-component-base About
