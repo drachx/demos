@@ -10,3 +10,9 @@ npm run storybook
 # 3 - Create Component
 ./cli/init
 ./cli/create-component-base About
+
+
+# References
+https://create-next-app.github.io/
+https://storybook.js.org
+https://github.com/drachx/demos
