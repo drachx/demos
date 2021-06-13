@@ -8,8 +8,8 @@ playground: https://www.graphqlbin.com/v2/new
 api: https://graphbrainz.herokuapp.com/
 others: https://apis.guru/graphql-apis/
 
-$ npx create-next-app weather
-$ cd weather
+$ npx create-next-app music
+$ cd music
 $ npm i @apollo/client graphql
 $ npm run dev
 */
