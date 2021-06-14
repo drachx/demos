@@ -4,7 +4,7 @@
 2. Playground - https://www.graphqlbin.com/v2/new
 3. GraphQL server - https://graphbrainz.herokuapp.com/
 4. Query
-
+```
     {
         search {
             releaseGroups(query: "Christmas") {
@@ -21,12 +21,12 @@
             }
         }
     }
-
-5. npx create-next-app music
-6. cd music
-7. install prereq - $ npm i @apollo/client graphql
-8. npm run dev
-9. create pages/music.js
+```
+5. `$ npx create-next-app music`
+6. `$ cd music`
+7. install prereq - `$ npm i @apollo/client graphql`
+8. `$ npm run dev`
+9. create `pages/music.js`
 10. Add imports
 ```
     import Head from "next/head";
