@@ -28,14 +28,15 @@
 8. npm run dev
 9. create pages/music.js
 10. Add imports
-
+```
     import Head from "next/head";
     import styles from "../styles/Home.module.css";
     import { ApolloClient, InMemoryCache, useQuery, gql } from "@apollo/client";
-    
+```
 11. getStaticProps - fetch data when loading
 
 // Fetch server side data
+```
 export async function getStaticProps() {
     const client = new ApolloClient({
         uri: "https://graphbrainz.herokuapp.com/",
@@ -69,9 +70,11 @@ export async function getStaticProps() {
         },
     };
 }
+```
 
 12. Create component
 
+```
 // create component
 export default function Home({ data }) {
     const imageStyle = { width: "250px", height: "250px" };
@@ -102,6 +105,7 @@ export default function Home({ data }) {
         </div>
     );
 }
+```
 
 /*
 
