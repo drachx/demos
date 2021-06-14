@@ -1,34 +1,114 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+60 seconds
 
-## Getting Started
+1. GraphQL app client - quick sample app - https://graphql.org/
+2. Playground - https://www.graphqlbin.com/v2/new
+3. GraphQL server - https://graphbrainz.herokuapp.com/
+4. Query
 
-First, run the development server:
+    {
+        search {
+            releaseGroups(query: "Christmas") {
+                results: edges {
+                    releaseGroup: node {
+                        title
+                        fanArt {
+                            albumCovers {
+                                url
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+5. npx create-next-app music
+6. cd music
+7. install prereq - $ npm i @apollo/client graphql
+8. npm run dev
+9. create pages/music.js
+10. Add imports
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+    import Head from "next/head";
+    import styles from "../styles/Home.module.css";
+    import { ApolloClient, InMemoryCache, useQuery, gql } from "@apollo/client";
+    
+11. getStaticProps - fetch data when loading
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+// Fetch server side data
+export async function getStaticProps() {
+    const client = new ApolloClient({
+        uri: "https://graphbrainz.herokuapp.com/",
+        cache: new InMemoryCache(),
+    });
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+    const { data } = await client.query({
+        query: gql`
+            {
+                search {
+                    releaseGroups(query: "Christmas") {
+                        results: edges {
+                            releaseGroup: node {
+                                title
+                                fanArt {
+                                    albumCovers {
+                                        url
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        `,
+    });
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+    return {
+        props: {
+            data: data.search.releaseGroups.results
+        },
+    };
+}
 
-## Learn More
+12. Create component
 
-To learn more about Next.js, take a look at the following resources:
+// create component
+export default function Home({ data }) {
+    const imageStyle = { width: "250px", height: "250px" };
+    const media = data.filter(
+        data => !!data.releaseGroup.fanArt
+            && !!data.releaseGroup.fanArt.albumCovers
+            && data.releaseGroup.fanArt.albumCovers.length > 0
+    );
+    return (
+        <div className={styles.container}>
+            <Head>
+                <title>Music Graphql</title>
+                <meta name="description" content="Music Graphql" />
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
+            <main className={styles.main}>
+                <h1 className={styles.title}>Music ({media.length})</h1>
+                <div className={styles.grid}>
+                    {media.map((data) => (
+                        <div className={styles.card}>
+                            <h2>{data.releaseGroup.title}</h2>
+                            <img src={data.releaseGroup.fanArt.albumCovers[0].url} style={imageStyle}></img>
+                        </div>
+                    ))}
+                </div>
+            </main>
+            <footer className={styles.footer}>/;.</footer>
+        </div>
+    );
+}
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+/*
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+1. GraphQL app client - https://graphql.org/
+2. Playground - https://www.graphqlbin.com/v2/new
+3. GraphQL server - https://graphbrainz.herokuapp.com/
+4. More GraphQL API - https://github.com/APIs-guru/graphql-apis
+5. NextJS + Apollo + GraphQL
+ 
+*/
