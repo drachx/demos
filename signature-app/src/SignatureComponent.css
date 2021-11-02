@@ -1,0 +1,26 @@
+* {
+    box-sizing: border-box;
+}
+
+.SignatureContainer {
+    border: solid 1px #ccc;
+}
+
+.SignaturePad {
+    width: 800px;
+    height: 400px;
+    border: solid 1px #ccc;
+}
+
+.SignatureButtons {
+    margin: 2px;
+    width: 200px;
+    height: 30px;
+}
+
+.SignatureImage {
+    background-size: 300px 100px;
+    width: 300px;
+    height: 100px;
+    border: solid 1px #ccc;
+}
